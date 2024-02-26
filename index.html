@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            data-name="vs/editor/editor.main"
+            href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.46.0/min/vs/editor/editor.main.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.46.0/min/vs/loader.min.js"></script>
+        <script defer src="monaco.js"></script>
+        <title>Test Form with Monaco Editor</title>
+    </head>
+
+    <body>
+        <form
+            onsubmit="console.log(Object.fromEntries(new FormData(event.target).entries()))"
+            action="#"
+        >
+            <fieldset>
+                <monaco-editor
+                    name="resource"
+                    content-type="application/fhir+json"
+                    style="height: 8rem; width: 100%"
+                />
+            </fieldset>
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>

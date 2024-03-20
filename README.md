@@ -1,6 +1,6 @@
 # Monaco Editor Web Component
 
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/axelv21/monaco-web-component)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/axelv/monaco-web-component)
 
 This web component wraps the [monaco editor](https://microsoft.github.io/monaco-editor) and provides a simple way to integrate it into your HTMLForms.
 

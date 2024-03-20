@@ -6,18 +6,22 @@ class MonacoEditor extends HTMLElement {
     this.innerHTML = `<div id="container" style="width:800px;height:200px;border:1px solid grey"></div>`;
     this.contentType = this.getAttribute("content-type");
     this.name = this.getAttribute("name");
+    this.filename = this.getAttribute("filename");
   }
   static get observedAttributes() {
-    return ["content-type", "name"];
+    return ["content-type", "name", "filename"];
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name, _, newValue) {
     if (name === "content-type") {
       this.contentType = newValue;
     }
     if (name === "name") {
       this.name = newValue;
       this.onNameChange();
+    }
+    if (name === "filename") {
+      this.filename = newValue;
     }
   }
 
@@ -28,7 +32,7 @@ class MonacoEditor extends HTMLElement {
   registerToForm(event) {
     const value = monaco.editor.getModels()[0].getValue();
     const blob = new Blob([value], { type: this.contentType });
-    event.formData.append(this.name, blob, "resource.json");
+    event.formData.append(this.name, blob, this.filename);
   }
 
   onNameChange() {
@@ -46,8 +50,8 @@ class MonacoEditor extends HTMLElement {
     const container = this.firstChild;
     require(["vs/editor/editor.main"], function () {
       monaco.editor.create(container, {
-        value: "const value = 'Hello, world!';",
-        language: "javascript",
+        value: "{}",
+        language: "json",
         automaticLayout: true,
       });
     });

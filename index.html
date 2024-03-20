@@ -15,18 +15,27 @@
     </head>
 
     <body>
-        <form
-            onsubmit="console.log(Object.fromEntries(new FormData(event.target).entries()))"
-            action="#"
-        >
+        <form action="#">
             <fieldset>
                 <monaco-editor
                     name="resource"
+                    filename="somename.json"
                     content-type="application/fhir+json"
                     style="height: 8rem; width: 100%"
                 />
             </fieldset>
             <button type="submit">Submit</button>
         </form>
+        <script>
+            // console.log all form data on submit
+            for (const form of document.forms) {
+                form.addEventListener("submit", (event) => {
+                    event.preventDefault();
+                    const formData = new FormData(event.target);
+                    const data = Object.fromEntries(formData.entries());
+                    console.log(data);
+                });
+            }
+        </script>
     </body>
 </html>

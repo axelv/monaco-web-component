@@ -4,7 +4,7 @@
   "description": "WebComponent version of Monaco Editor. Fully compatible with HTML Forms",
   "repository": {
     "type": "git",
-    "url": "https://github.com/axelv/monaco-web-component.git"
+    "url": "git://github.com/axelv/monaco-web-component.git"
   },
   "main": "monaco.js",
   "scripts": {

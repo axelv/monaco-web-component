@@ -1,0 +1,11 @@
+{
+  "name": "monaco-web-component",
+  "version": "1.0.0",
+  "description": "WebComponent version of Monaco Editor. Fully compatible with HTML Forms",
+  "main": "monaco.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Axel Vanraes",
+  "license": "MIT"
+}

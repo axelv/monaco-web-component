@@ -30,6 +30,22 @@ class MonacoEditor extends HTMLElement {
     }
   }
 
+  /**
+   * Safe parse JSON
+   * @param {string | object} rawValue
+   * @returns {object}
+   */
+  safeParseJSON(rawValue) {
+    if (typeof rawValue !== "string") return rawValue;
+    if (!rawValue) return {};
+    try {
+      return JSON.parse(rawValue);
+    } catch (error) {
+      console.error("Error parsing JSON", error);
+      return {};
+    }
+  }
+
   static get observedAttributes() {
     return ["content-type", "name", "filename"];
   }

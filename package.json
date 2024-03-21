@@ -1,6 +1,6 @@
 {
   "name": "monaco-web-component",
-  "version": "1.0.13",
+  "version": "1.0.15",
   "description": "WebComponent version of Monaco Editor. Fully compatible with HTML Forms",
   "repository": {
     "type": "git",

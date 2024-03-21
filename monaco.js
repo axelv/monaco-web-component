@@ -1,7 +1,9 @@
 class MonacoEditor extends HTMLElement {
   constructor() {
     super();
-    this.innerHTML = `<div id="container" style="width:800px;height:200px;border:1px solid grey"></div>`;
+    const classname = this.getAttribute("class") || "";
+    const style = this.getAttribute("style") || "";
+    this.innerHTML = `<div style="border:1px solid grey;${style}" class="${classname}"></div>`;
     this.language = this.getAttribute("language") || "json";
     this.contentType = this.getAttribute("content-type");
     this.name = this.getAttribute("name");

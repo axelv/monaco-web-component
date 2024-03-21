@@ -15,7 +15,7 @@
     </head>
 
     <body>
-        <form action="#">
+        <form action="#" method="post" enctype="multipart/form-data">
             <fieldset>
                 <monaco-editor
                     name="resource"
@@ -31,14 +31,14 @@
         </form>
         <script>
             // console.log all form data on submit
-            for (const form of document.forms) {
+            /** for (const form of document.forms) {
                 form.addEventListener("submit", (event) => {
-                    event.preventDefault();
+                    //event.preventDefault();
                     const formData = new FormData(event.target);
                     const data = Object.fromEntries(formData.entries());
                     console.log(data);
                 });
-            }
+            }*/
         </script>
     </body>
 </html>

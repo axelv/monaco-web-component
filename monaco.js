@@ -65,18 +65,18 @@ class MonacoEditor extends HTMLElement {
   }
 
   /**
-   * Register the editor to the form
+   * Handle formdata event
    * @param {FormDataEvent} event
    */
-  registerToForm(event) {
+  async handleFormData(event) {
     const value = monaco.editor.getModels()[0].getValue();
     const blob = new Blob([value], { type: this.contentType });
     event.formData.append(this.name, blob, this.filename);
   }
 
   onNameChange() {
-    this.closest("form").addEventListener("formdata", (event) =>
-      this.registerToForm(event),
+    this.closest("form")?.addEventListener("formdata", (event) =>
+      this.handleFormData(event),
     );
   }
 

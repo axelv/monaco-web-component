@@ -8,8 +8,7 @@ class MonacoEditor extends HTMLElement {
     this.contentType = this.getAttribute("content-type");
     this.name = this.getAttribute("name");
     this.filename = this.getAttribute("filename");
-    const rawSchema = this.getAttribute("schema");
-    this.schema = this.safeMakeJSON(rawSchema);
+    this.schema = this.getAttribute("schema");
     const rawDefaultValue = this.getAttribute("defaultvalue");
     this.defaultValue = this.safeMakeJSON(rawDefaultValue);
     console.log(rawDefaultValue, this.defaultValue);

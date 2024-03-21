@@ -9,24 +9,25 @@ class MonacoEditor extends HTMLElement {
     this.name = this.getAttribute("name");
     this.filename = this.getAttribute("filename");
     const rawSchema = this.getAttribute("schema");
-    this.schema = this.safeParseIfJSON(rawSchema);
+    this.schema = this.safeMakeJSON(rawSchema);
     const rawDefaultValue = this.getAttribute("defaultvalue");
-    this.defaultValue = this.safeParseIfJSON(rawDefaultValue);
+    this.defaultValue = this.safeMakeJSON(rawDefaultValue);
+    console.log(rawDefaultValue, this.defaultValue);
   }
 
   /**
-   * Parse JSON safely
+   * Safely serialize to JSON
    * @param {string | object} rawValue
-   * @returns {object}
+   * @returns {string}
    */
-  safeParseIfJSON(rawValue) {
-    if (typeof rawValue !== "string") return;
-    if (!rawValue) null;
+  safeMakeJSON(rawValue) {
+    if (typeof rawValue === "string") return rawValue;
+    if (!rawValue) "";
     try {
-      return JSON.parse(rawValue);
+      return JSON.stringify(rawValue);
     } catch (error) {
-      console.error("Error parsing JSON", error);
-      return null;
+      console.error("Error serializeing to JSON", error);
+      return "";
     }
   }
 

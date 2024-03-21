@@ -8,43 +8,43 @@ class MonacoEditor extends HTMLElement {
     this.contentType = this.getAttribute("content-type");
     this.name = this.getAttribute("name");
     this.filename = this.getAttribute("filename");
-    this.schema = this.getAttribute("schema");
+    const rawSchema = this.getAttribute("schema");
+    this.schema = this.safeParseJSON(rawSchema);
     const rawDefaultValue = this.getAttribute("defaultvalue");
     this.defaultValue = this.safeMakeJSON(rawDefaultValue);
-    console.log(rawDefaultValue, this.defaultValue);
-  }
+    console.debug(this)
 
-  /**
-   * Safely serialize to JSON
-   * @param {string | object} rawValue
-   * @returns {string}
-   */
-  safeMakeJSON(rawValue) {
-    if (typeof rawValue === "string") return rawValue;
-    if (!rawValue) "";
-    try {
-      return JSON.stringify(rawValue);
-    } catch (error) {
-      console.error("Error serializeing to JSON", error);
-      return "";
+    /**
+     * Safely serialize to JSON
+     * @param {string | object} rawValue
+     * @returns {string}
+     */
+    safeMakeJSON(rawValue) {
+      if (typeof rawValue === "string") return rawValue;
+      if (!rawValue) "";
+      try {
+        return JSON.stringify(rawValue);
+      } catch (error) {
+        console.error("Error serializeing to JSON", error);
+        return "";
+      }
     }
-  }
 
-  /**
-   * Safe parse JSON
-   * @param {string | object} rawValue
-   * @returns {object}
-   */
-  safeParseJSON(rawValue) {
-    if (typeof rawValue !== "string") return rawValue;
-    if (!rawValue) return {};
-    try {
-      return JSON.parse(rawValue);
-    } catch (error) {
-      console.error("Error parsing JSON", error);
-      return {};
+    /**
+     * Safe parse JSON
+     * @param {string | object} rawValue
+     * @returns {object}
+     */
+    safeParseJSON(rawValue) {
+      if (typeof rawValue !== "string") return rawValue;
+      if (!rawValue) return {};
+      try {
+        return JSON.parse(rawValue);
+      } catch (error) {
+        console.error("Error parsing JSON", error);
+        return {};
+      }
     }
-  }
 
   static get observedAttributes() {
     return ["content-type", "name", "filename"];
@@ -89,7 +89,7 @@ class MonacoEditor extends HTMLElement {
     const value = this.defaultValue;
     const schema = this.schema;
     const language = this.language;
-    require(["vs/editor/editor.main"], function () {
+    require(["vs/editor/editor.main"], function() {
       if (schema) {
         monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
           validate: true,

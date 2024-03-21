@@ -1,5 +1,3 @@
-function registerToForm(editor) {}
-
 class MonacoEditor extends HTMLElement {
   constructor() {
     super();
@@ -7,7 +5,8 @@ class MonacoEditor extends HTMLElement {
     this.contentType = this.getAttribute("content-type");
     this.name = this.getAttribute("name");
     this.filename = this.getAttribute("filename");
-    this.value = this.getAttribute("defaultvalue");
+    this.defaultValue = this.getAttribute("defaultvalue");
+    console.log(this.defaultValue);
   }
   static get observedAttributes() {
     return ["content-type", "name", "filename"];
@@ -49,9 +48,10 @@ class MonacoEditor extends HTMLElement {
       },
     });
     const container = this.firstChild;
+    const value = this.defaultValue;
     require(["vs/editor/editor.main"], function () {
       monaco.editor.create(container, {
-        value: this.value,
+        value: value,
         language: "json",
         automaticLayout: true,
       });

@@ -2,10 +2,12 @@ class MonacoEditor extends HTMLElement {
   constructor() {
     super();
     this.innerHTML = `<div id="container" style="width:800px;height:200px;border:1px solid grey"></div>`;
+    this.language = this.getAttribute("language") || "json";
     this.contentType = this.getAttribute("content-type");
     this.name = this.getAttribute("name");
     this.filename = this.getAttribute("filename");
-    this.schema = this.getAttribute("schema");
+    const rawSchema = this.getAttribute("schema");
+    this.schema = rawSchema ? JSON.parse(rawSchema) : null;
     this.defaultValue = this.getAttribute("defaultvalue");
   }
   static get observedAttributes() {
@@ -50,23 +52,25 @@ class MonacoEditor extends HTMLElement {
     const container = this.firstChild;
     const value = this.defaultValue;
     const schema = this.schema;
+    const language = this.language;
     require(["vs/editor/editor.main"], function () {
-      monaco.editor.create(container, {
-        value: value,
-        language: "json",
-        automaticLayout: true,
-      });
       if (schema) {
         monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
           validate: true,
           schemas: [
             {
               uri: "http://monaco-web-component/schema.json",
-              schema: schema,
+              fileMatch: ["*"],
+              schema,
             },
           ],
         });
       }
+      monaco.editor.create(container, {
+        value,
+        language,
+        automaticLayout: true,
+      });
     });
   }
 }

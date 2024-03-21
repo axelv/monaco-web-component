@@ -21,8 +21,10 @@
                     name="resource"
                     filename="somename.json"
                     content-type="application/fhir+json"
+                    language="json"
                     style="height: 8rem; width: 100%"
                     defaultvalue='{"resourceType":"Patient","id":"example","active":true}'
+                    schema='{"$schema":"http://json-schema.org/draft-07/schema#","title":"Patient","type":"object","properties":{"resourceType":{"type":"string","enum":["Patient"]},"id":{"type":"string"},"active":{"type":"boolean"}},"required":["resourceType","id","active"]}'
                 />
             </fieldset>
             <button type="submit">Submit</button>

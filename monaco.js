@@ -7,7 +7,7 @@ class MonacoEditor extends HTMLElement {
     this.contentType = this.getAttribute("content-type");
     this.name = this.getAttribute("name");
     this.filename = this.getAttribute("filename");
-    this.value = this.getAttribute("defaultValue");
+    this.value = this.getAttribute("defaultvalue");
   }
   static get observedAttributes() {
     return ["content-type", "name", "filename"];

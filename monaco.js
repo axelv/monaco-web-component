@@ -7,14 +7,25 @@ class MonacoEditor extends HTMLElement {
     this.name = this.getAttribute("name");
     this.filename = this.getAttribute("filename");
     const rawSchema = this.getAttribute("schema");
-    try {
-      this.schema = rawSchema ? JSON.parse(rawSchema) : null;
-    } finally {
-      this.schema = null;
-      console.error("Error parsing schema");
-    }
+    this.schema = this.parseSchema(rawSchema);
     this.defaultValue = this.getAttribute("defaultvalue");
   }
+
+  /**
+   * Parse the schema attribute
+   * @param {string} rawSchema
+   * @returns {object}
+   */
+  parseSchema(rawSchema) {
+    if (!rawSchema) null;
+    try {
+      return JSON.parse(rawSchema);
+    } catch (error) {
+      console.error("Error parsing schema", error);
+      return null;
+    }
+  }
+
   static get observedAttributes() {
     return ["content-type", "name", "filename"];
   }
